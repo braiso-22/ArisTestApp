@@ -11,7 +11,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
-                NavigationLink(destination: Text("Destination")) {
+                NavigationLink(destination: BMIView()) {
                     Text("BMI calculator")
                 }
             }.navigationBarTitle("Test collection")
