@@ -14,6 +14,9 @@ struct ContentView: View {
                 NavigationLink(destination: BMIView()) {
                     Text("BMI calculator")
                 }
+                NavigationLink(destination: SuperHeroFinderView()) {
+                    Text("Super hero finder")
+                }
             }.navigationBarTitle("Test collection")
         }
     }
