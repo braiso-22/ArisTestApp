@@ -20,52 +20,54 @@ struct BMIView: View {
     var body: some View {
         NavigationStack{
             List{
-                Picker(selection: $selectedSex) {
-                    Text("Man").tag(Sex.man)
-                    Text("Woman").tag(Sex.woman)
-                } label: {
-                    Text("Gender:")
-                }
-                
-                VStack{
-                    Text("Height: \(String(format: "%.1f", height)) cm.")
-                    Slider(
-                        value: $height,
-                        in: 60...250,
-                        step: 0.5
+                Section(header: Text("BMI calculator")){
+                    Picker(selection: $selectedSex) {
+                        Text("Man").tag(Sex.man)
+                        Text("Woman").tag(Sex.woman)
+                    } label: {
+                        Text("Gender:")
+                    }
+                    
+                    VStack{
+                        Text("Height: \(String(format: "%.1f", height)) cm.")
+                        Slider(
+                            value: $height,
+                            in: 60...250,
+                            step: 0.5
+                        ){
+                            Text("Height:")
+                        } minimumValueLabel: {
+                            Text("60")
+                        } maximumValueLabel: {
+                            Text("250")
+                        }
+                    }
+                    
+                    Stepper (
+                        value:$age,
+                        in: 2...150,
+                        step: 1
                     ){
-                        Text("Height:")
-                    } minimumValueLabel: {
-                        Text("60")
-                    } maximumValueLabel: {
-                        Text("250")
+                        Text("Age: \(age) years old")
+                    }
+                    
+                    Stepper (
+                        value:$weight,
+                        in: 11...300,
+                        step: 1
+                    ){
+                        Text("Weight: \(Int(weight.rounded())) kg.")
+                    }
+                    
+                    NavigationLink(destination: BMIResultView(bmi:getBMI(
+                        heightInCm: height,
+                        weightInKg: weight),
+                                                              idealWeight: getIdealWeight(heightInCm: height)
+                    )){
+                        Text("Calculate")
                     }
                 }
-                
-                Stepper (
-                    value:$age,
-                    in: 2...150,
-                    step: 1
-                ){
-                    Text("Age: \(age) years old")
-                }
-                
-                Stepper (
-                    value:$weight,
-                    in: 11...300,
-                    step: 1
-                ){
-                    Text("Weight: \(Int(weight.rounded())) kg.")
-                }
-                
-                NavigationLink(destination: BMIResultView(bmi:getBMI(
-                    heightInCm: height,
-                    weightInKg: weight),
-                  idealWeight: getIdealWeight(heightInCm: height)
-                )){
-                    Text("Calculate")
-                }
-            }.navigationBarTitle("BMI calculator")
+            }
         }
     }
 }
