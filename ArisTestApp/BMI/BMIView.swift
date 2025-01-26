@@ -28,11 +28,11 @@ struct BMIView: View {
                 }
                 
                 VStack{
-                    Text("Height: \(Int(height.rounded())) cm.")
+                    Text("Height: \(String(format: "%.1f", height)) cm.")
                     Slider(
                         value: $height,
                         in: 60...250,
-                        step: 1
+                        step: 0.5
                     ){
                         Text("Height:")
                     } minimumValueLabel: {
@@ -58,12 +58,29 @@ struct BMIView: View {
                     Text("Weight: \(Int(weight.rounded())) kg.")
                 }
                 
-                NavigationLink(destination: {}){
+                NavigationLink(destination: BMIResultView(bmi:getBMI(
+                    heightInCm: height,
+                    weightInKg: weight),
+                  idealWeight: getIdealWeight(heightInCm: height)
+                )){
                     Text("Calculate")
                 }
             }.navigationBarTitle("BMI calculator")
         }
     }
+}
+
+func getBMI(heightInCm: Double, weightInKg: Double) -> Double {
+    let weight = weightInKg
+    let height = heightInCm / 100
+    let bmi = weight / (height * height)
+    return bmi
+}
+
+func getIdealWeight(heightInCm: Double) -> Double {
+    let height = heightInCm / 100
+    let idealWeight = 24 * height * height
+    return idealWeight
 }
 
 
