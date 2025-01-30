@@ -76,8 +76,8 @@ struct Image: Codable {
 
 // MARK: - Powerstats
 struct Powerstats: Codable {
-    let intelligence, strength, speed, durability: String
-    let power, combat: String
+    let intelligence, strength, speed, durability: String?
+    let power, combat: String?
 }
 
 // MARK: - Work

@@ -8,8 +8,19 @@
 import SwiftUI
 
 struct HeroItem: Identifiable {
-    var id: String
-    var name: String
+    let id: String
+    let name: String
+    let imageUrl: String
+    let powerstats: HeroPowerstats?
+}
+
+struct HeroPowerstats {
+    let intelligence: Int
+    let strength: Int
+    let speed: Int
+    let durability: Int
+    let power: Int
+    let combat: Int
 }
 
 struct SuperHeroFinderView: View {
@@ -29,7 +40,9 @@ struct SuperHeroFinderView: View {
                 Text("Search for an existing super hero")
             }
             List(superHeroes){ hero in
-                NavigationLink(destination: {}){
+                NavigationLink(destination: {
+                    SuperHeroDetailView(url:hero.imageUrl,name: hero.name,powerStats:hero.powerstats)
+                }){
                     Text(hero.name)
                 }
             }
@@ -50,7 +63,7 @@ struct SuperHeroFinderView: View {
                 isLoading = true
                 let test = try await SuperHeroApi().getHeroesByQuery(query:searchText)
                 superHeroes = test.results.map{ result in
-                    HeroItem(id: result.id, name: result.name)
+                    result.toHeroItem()
                 }
                 isLoading = false
             } catch {
