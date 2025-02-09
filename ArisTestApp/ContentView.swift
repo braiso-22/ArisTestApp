@@ -17,6 +17,9 @@ struct ContentView: View {
                 NavigationLink(destination: SuperHeroFinderView()) {
                     Text("Super hero finder")
                 }
+                NavigationLink(destination: Maps()){
+                    Text("Maps")
+                }
             }.navigationBarTitle("Test collection")
         }
     }

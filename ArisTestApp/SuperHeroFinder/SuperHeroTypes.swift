@@ -27,7 +27,7 @@ struct Result: Codable {
     let appearance: Appearance
     let work: Work
     let connections: Connections
-    let image: Image
+    let image: ImageDto
 }
 
 // MARK: - Appearance
@@ -70,7 +70,7 @@ struct Connections: Codable {
 }
 
 // MARK: - Image
-struct Image: Codable {
+struct ImageDto: Codable {
     let url: String
 }
 
