@@ -6,3 +6,4 @@ This is a project with a list of basic apps
 
 - BMI calculator
 - Super Hero Finder
+- Maps Screen
